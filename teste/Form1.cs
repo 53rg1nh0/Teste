@@ -1,6 +1,4 @@
-using Microsoft.Office.Interop.Excel;
 using System.Data;
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,12 +11,18 @@ using System.IO;
 using System.Data.OleDb;
 using DataTable = System.Data.DataTable;
 using System.Collections;
-using Application = Microsoft.Office.Interop.Excel.Application;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using Microsoft.Office.Interop.Excel;
 
 namespace teste
 {
+    
+    
     public partial class frmTeste : Form
     {
+       
         public frmTeste()
         {
             InitializeComponent();
@@ -27,8 +31,7 @@ namespace teste
         private void btnIncerir_Click(object sender, EventArgs e)
         {
             using (OleDbConnection Conexao = new OleDbConnection(ConexaoXlsx()))
-            {
-
+            {              
                 string Sql = "INSERT INTO [Folha1$] (id, nome, contato, documento) VALUES (@id, @nome, @contato, @documento)";
 
                 OleDbCommand Comandos = new OleDbCommand(Sql, Conexao);
@@ -40,7 +43,6 @@ namespace teste
                 Conexao.Open();
                 try
                 {
-                    Comandos.ExecuteNonQuery();
                     MessageBox.Show("Dados Inseridos com Sucesso!");
                     LimparDados();
                 }
@@ -49,6 +51,18 @@ namespace teste
                     MessageBox.Show("Ocorreu um erro ao Inserir os Dados!");
                 }
                 Conexao.Close();
+
+                //Excel.Application app = new Excel.Application();
+                //Workbook pasta;
+                //Worksheet plan;
+                //string path = @"C:\Users\sergi\OneDrive\Área de Trabalho\Teste.xlsx";
+                //pasta = app.Workbooks.Open(path);
+
+                //if(pasta!= null)
+                //{
+                //    pasta.Close(true);
+                //    app.Quit();
+                //}
             }
         }
 
@@ -82,7 +96,7 @@ namespace teste
 
         private string ConexaoXlsx()
         {
-            string ArquivoXlsx = @"C:\Users\sergi\OneDrive\Área de Trabalho\Teste.xlsx";
+            string ArquivoXlsx = @"C:\Users\sergi\OneDrive\Área de Trabalho\Teste.xlsX";
             return "Provider=Microsoft.ACE.OLEDB.12.0;Data Source='" + ArquivoXlsx + "';Extended Properties=Excel 12.0;";
         }
 
@@ -101,29 +115,59 @@ namespace teste
 
         private void frmTeste_Load(object sender, EventArgs e)
         {
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Start();
+          
+
             Tabela();
+
+           
+            
+
+            string nomeProcesso = Process.GetCurrentProcess().ProcessName;
+
+            // Obtém todos os processos com o nome do atual
+            Process[] processes = Process.GetProcessesByName("OneDrive");
+
+            // Maior do que 1, porque a instância atual também conta
+            if (processes.Length >= 1)
+            {
+                //MessageBox.Show(nomeProcesso);
+            }
+            else
+            {
+                //MessageBox.Show("Onedrive não está em execução");
+            }
+            //stopwatch.Stop();
+
+            //MessageBox.Show("O processo levou " + stopwatch.ElapsedMilliseconds + " milissegundos para executar.");
+
+
+            //InicializarAplicacao();
         }
 
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            using (OleDbConnection Conexao = new OleDbConnection(ConexaoXlsx()))
-            {
-                string Sql = /*"DELETE FROM [Folha1$] WHERE id = 'teste'";*/"UPDATE [Folha1$] SET nome= 'Joao' WHERE id = 'teste2'";
-                Conexao.Open();
-                OleDbCommand Comandos = new OleDbCommand(Sql, Conexao);
-                
-                try
-                {
-                    Comandos.ExecuteNonQuery();
-                    MessageBox.Show("Dados Inseridos com Sucesso!");
-                    LimparDados();
-                }
-                catch
-                {
-                    MessageBox.Show("Ocorreu um erro ao Inserir os Dados!");
-                }
-                Conexao.Close();
-            }
+
+            //using (OleDbConnection Conexao = new OleDbConnection(ConexaoXlsx()))
+            //{
+            //    string Sql = /*"DELETE FROM [Folha1$] WHERE id = 'teste'";*/"UPDATE [Folha1$] SET nome= 'Joao' WHERE id = 'teste2'";
+            //    Conexao.Open();
+            //    OleDbCommand Comandos = new OleDbCommand(Sql, Conexao);
+
+            //    try
+            //    {
+            //        Comandos.ExecuteNonQuery();
+            //        MessageBox.Show("Dados Inseridos com Sucesso!");
+            //        LimparDados();
+            //    }
+            //    catch
+            //    {
+            //        MessageBox.Show("Ocorreu um erro ao Inserir os Dados!");
+            //    }
+            //    Conexao.Close();
+            //}
+
         }
     }
 }

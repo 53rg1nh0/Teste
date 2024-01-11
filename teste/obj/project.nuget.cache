@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "zixdNVyHzsSxgud0d756b7P+GC5+mlZro6+UbH1fa1SL/BnxeVgWsOkXLR12x3akTkCI9icSo4UWA43+wOmBAA==",
+  "dgSpecHash": "lXoqgCtDV/D/zVzBsByH7gaOIIRFPERkAHOyQGi9WQaJsFvtJnn4r2+VeWXoVHE+ShFbTh6e25IZW5KRO7nD6A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\sergi\\OneDrive\\Documentos\\Teste\\teste\\teste\\teste.csproj",
+  "projectFilePath": "C:\\Users\\sergi\\OneDrive\\Área de Trabalho\\Teste\\teste\\teste\\teste.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\sergi\\.nuget\\packages\\microsoft.office.interop.excel\\15.0.4795.1001\\microsoft.office.interop.excel.15.0.4795.1001.nupkg.sha512",
     "C:\\Users\\sergi\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\sergi\\.nuget\\packages\\system.configuration.configurationmanager\\6.0.0\\system.configuration.configurationmanager.6.0.0.nupkg.sha512",
     "C:\\Users\\sergi\\.nuget\\packages\\system.data.oledb\\6.0.0\\system.data.oledb.6.0.0.nupkg.sha512",
