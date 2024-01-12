@@ -30,8 +30,16 @@ namespace teste
 
         private void btnIncerir_Click(object sender, EventArgs e)
         {
+            Excel.Application app = new Excel.Application();
+            Workbook pasta;
+            Worksheet plan;
+            string path = @"C:\Users\sergi\OneDrive\Área de Trabalho\Teste.xlsx";
+            pasta = app.Workbooks.Open(path);
+
             using (OleDbConnection Conexao = new OleDbConnection(ConexaoXlsx()))
-            {              
+            {
+               
+
                 string Sql = "INSERT INTO [Folha1$] (id, nome, contato, documento) VALUES (@id, @nome, @contato, @documento)";
 
                 OleDbCommand Comandos = new OleDbCommand(Sql, Conexao);
@@ -43,6 +51,7 @@ namespace teste
                 Conexao.Open();
                 try
                 {
+                    Comandos.ExecuteNonQuery();
                     MessageBox.Show("Dados Inseridos com Sucesso!");
                     LimparDados();
                 }
@@ -50,19 +59,16 @@ namespace teste
                 {
                     MessageBox.Show("Ocorreu um erro ao Inserir os Dados!");
                 }
+               
                 Conexao.Close();
 
-                //Excel.Application app = new Excel.Application();
-                //Workbook pasta;
-                //Worksheet plan;
-                //string path = @"C:\Users\sergi\OneDrive\Área de Trabalho\Teste.xlsx";
-                //pasta = app.Workbooks.Open(path);
+                
 
-                //if(pasta!= null)
-                //{
-                //    pasta.Close(true);
-                //    app.Quit();
-                //}
+                if (pasta != null)
+                {
+                    pasta.Close();
+                    app.Quit();
+                }
             }
         }
 
@@ -117,7 +123,11 @@ namespace teste
         {
             //Stopwatch stopwatch = new Stopwatch();
             //stopwatch.Start();
-          
+            //Excel.Application app = new Excel.Application();
+            //Workbook pasta;
+            //Worksheet plan;
+            //string path = @"C:\Users\sergi\OneDrive\Área de Trabalho\Teste.xlsx";
+            //pasta = app.Workbooks.Open(path);
 
             Tabela();
 
@@ -149,24 +159,24 @@ namespace teste
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
 
-            //using (OleDbConnection Conexao = new OleDbConnection(ConexaoXlsx()))
-            //{
-            //    string Sql = /*"DELETE FROM [Folha1$] WHERE id = 'teste'";*/"UPDATE [Folha1$] SET nome= 'Joao' WHERE id = 'teste2'";
-            //    Conexao.Open();
-            //    OleDbCommand Comandos = new OleDbCommand(Sql, Conexao);
+            using (OleDbConnection Conexao = new OleDbConnection(ConexaoXlsx()))
+            {
+                string Sql = /*"DELETE FROM [Folha1$] WHERE id = 'teste'";*/"UPDATE [Folha1$] SET nome= 'Joao' WHERE id = 'teste2'";
+                Conexao.Open();
+                OleDbCommand Comandos = new OleDbCommand(Sql, Conexao);
 
-            //    try
-            //    {
-            //        Comandos.ExecuteNonQuery();
-            //        MessageBox.Show("Dados Inseridos com Sucesso!");
-            //        LimparDados();
-            //    }
-            //    catch
-            //    {
-            //        MessageBox.Show("Ocorreu um erro ao Inserir os Dados!");
-            //    }
-            //    Conexao.Close();
-            //}
+                try
+                {
+                    Comandos.ExecuteNonQuery();
+                    MessageBox.Show("Dados Inseridos com Sucesso!");
+                    LimparDados();
+                }
+                catch
+                {
+                    MessageBox.Show("Ocorreu um erro ao Inserir os Dados!");
+                }
+                Conexao.Close();
+            }
 
         }
     }
